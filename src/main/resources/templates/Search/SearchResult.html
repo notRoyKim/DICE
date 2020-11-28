@@ -13,6 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <!--favicon-->
     <link rel="icon" href="/Images/favicon.ico" type="image/x-icon">
+    <!--blocksit-->
+    <script src="/JS/blocksit.js"></script>
+    <!--ImagesLoaded min-->
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <!--custom css-->
     <link rel="stylesheet" href="/CSS/Header.css">
     <link rel="stylesheet" href="/CSS/Base.css">
@@ -95,26 +99,152 @@
             "의 검색 결과 입니다.
         </div>
         <div class="search_result">
-            <div class="non_blocksIt">
-                <div class="search_imgbox">
-                    사진
-                </div>
-                <div class="search_context">
-                    <div class="search_title">다빈치 코드</div>
-                    <div class="search_options">2~4명, 7세 이상, 10~20분</div>
-                    <input type="button" value="상세규칙 바로가기"/>
-                    <div>
-                        <i class="xi-star-o"></i>
-                        <i class="xi-star-o"></i>
-                        <i class="xi-star-o"></i>
-                        <i class="xi-star-o"></i>
-                        <i class="xi-star-o"></i>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+<script>
+    var ListArray = Array();
+    var Page = 0;
+    var NuminPage = 20;
+
+    var Flag = true;
+    var EndFlag = true;
+
+    // query = 검색어
+    /*<![CDATA[*/
+    var query = "[[${query}]]";
+    /*]]>*/
+
+    $(window).ready(function() {
+        //Content > Searchbox의 너비를 받아옴
+        var width = $(".search_result").width();
+
+        //mobile 환경(가로너비 768이하)에선 가로줄에 1개만, 아닐경우(PC 등)에서는 4개가 출력되도록
+        $('.search_result').imagesLoaded( function(){
+            if (width<=768)
+            {
+                $('.search_result').BlocksIt({
+                    numOfCol:1,
+                    offsetX:5,
+                    offsetY:5
+                });
+            }
+            else {
+                $('.search_result').BlocksIt({
+                    numOfCol:4,
+                    offsetX:5,
+                    offsetY:5
+                });
+            }
+        });
+
+        // 화면 크기 변경시 grid 다시 계산
+        $(window).resize(function() {
+            $('.search_result').BlocksIt ({
+                numOfCol: 4,
+                offsetX: 5,
+                offsetY: 5
+            });
+        });
+
+        $(window).scroll(function()
+        {
+            if (document.body.scrollHeight - $(this).scrollTop()  <= $(this).height())
+            {
+                Scroll_DataLoad();
+            }
+        });
+        DataLoad();
+    });
+
+    function DataLoad() {
+        if(Flag && EndFlag) {
+
+            //동기를 위해 Lock을 할 때 Flag
+            Flag = false;
+
+            var DataURL = "/Search_JSON/?query="  + query +  "&Page=" + Page + "&NumPage=" + NuminPage ;
+            $.getJSON(DataURL, function(JSonData) {
+
+                if(JSonData["Count"] == 0) {
+                    EndFlag = false;
+                    return;
+                }
+
+                //Div태그 작성
+                $.each(JSonData.SearchResult, function(Key, Val) {
+                    var Temp = MakeDIV(Val);
+                    ListArray.push(Temp);
+                    $(".search_result").append($(Temp));
+                });
+            })
+                .done(function() {
+                    $('.search_result').imagesLoaded( function(){
+                        $('.search_result').BlocksIt({
+                            numOfCol: 4,
+                            offsetX: 5,
+                            offsetY: 5
+                        });
+                        Page++;
+                        Flag = true;
+                    });
+                });
+        }
+    }
+
+    function Scroll_DataLoad() {
+        if(Flag && EndFlag) {
+            Flag = false;
+
+            var DataURL = "/Search_JSON/?query="  + query +  "&Page=" + Page + "&NumPage=" + NuminPage ;
+            $.getJSON(DataURL, function(JSonData) {
+
+                if(JSonData["Count"] == 0) {
+                    EndFlag = false;
+                    return;
+                }
+
+                $.each(JSonData.SearchResult, function(Key, Val) {
+                    var Temp = MakeDIV(Val);
+                    ListArray.push(Temp);
+                    $(".search_result").append($(Temp));
+                });
+            })
+                .done(function() {
+                    if(EndFlag)
+                        return;
+                    $('.search_result').imagesLoaded( function(){
+                        $('.search_result').BlocksIt({
+                            numOfCol: 4,
+                            offsetX: 5,
+                            offsetY: 5
+                        });
+                        Page++;
+                        Flag = true;
+                    });
+                });
+        }
+    }
+
+    function MakeDIV(Val) {
+        //링크 주소가 view를 가리키고, No를 get으로 받는 링크를 가진 grid를 만듬
+        var StrTmp = '<div class="non_blocksIt"><div class="search_imgbox">';
+        //만일 DB에서 가져온 값에 사진이 있다면
+        if(Val.files != "") {
+            StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
+        }
+        else {
+            StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></div>';
+        }
+        StrTmp += '<div class="search_context"><div class="search_title">' + Val.title + '</div>' +
+            '<div class="search_options">' + Val.headcount + ',' + Val.age + ',' + Val.playtime + '</div>' +
+            '<input type="button" value="상세규칙 바로가기"/><div><i class="xi-star-o"></i><i class="xi-star-o">' +
+            '</i><i class="xi-star-o"></i><i class="xi-star-o"></i><i class="xi-star-o"></i></div></div></div>';
+
+        return StrTmp;
+    }
+</script>
 
 <style>
     .content {
@@ -141,6 +271,7 @@
         color: #0e90d2;
     }
     .search_result {
+        position: relative;
         min-height: 659px;
         width: 100%;
     }
@@ -156,6 +287,10 @@
         width: 200px;
         height: 200px;
         background: white;
+    }
+    .search_imgbox img {
+        height: auto;
+        width: 100%;
     }
     .search_context {
         position: absolute;

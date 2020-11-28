@@ -17,6 +17,15 @@ public class SearchController {
 
         String query = request.getParameter("query");
 
+        if(query == null) {
+            mv.setViewName("ErrorControl/404");
+            return mv;
+        }
+        else if(query.length() < 3) {
+            mv.setViewName("ErrorControl/404");
+            return mv;
+        }
+
         mv.setViewName("Search/SearchResult");
         mv.addObject("query",query);
         return mv;

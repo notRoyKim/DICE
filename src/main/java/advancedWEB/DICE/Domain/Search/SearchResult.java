@@ -8,8 +8,9 @@ import lombok.Setter;
 public class SearchResult {
     String ID;
     String Title;
-    String Difficulty;
+    String Headcount;
     String Age;
     String Playtime;
+    String Files;
     float Rate;
 }
