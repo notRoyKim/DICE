@@ -1,0 +1,32 @@
+/*              */
+/*   Notroykim  */
+/*     김상우    */
+/*              */
+
+header > div {
+    height: 100%;
+    float: left;
+}
+header {
+    width: 100%;
+    height: 120px;
+    position: relative;
+}
+.header_rmb {
+    margin-left: 70%;
+    position: relative;
+    width: 30%;
+}
+.header_rmb > div {
+    position: absolute;
+    top : 5%;
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    color: gray;
+}
+.rmb_rank {
+    right: 40%;
+}
+.rmb_category {
+    right : 20%;
+}

@@ -16,54 +16,77 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <!--favicon-->
+    <link rel="icon" href="/Images/favicon.ico" type="image/x-icon">
+    <!--custom css-->
+    <link rel="stylesheet" href="/CSS/Header.css">
+    <link rel="stylesheet" href="/CSS/Base.css">
 </head>
 
 <body>
     <header>
         <div class="header_rmb">
-            <div class="rmb_rank">랭킹</div>
-            <div class="rmb_category">카테고리</div>
+            <div class="rmb_rank">
+                <a href="/Ranking">랭킹</a>
+            </div>
+            <div class="rmb_category">
+                <a href="/Category">카테고리</a>
+            </div>
         </div>
     </header>
-
-    <style>
-        header > div {
-            height: 100%;
-            float: left;
-        }
-        header {
-            width: 100%;
-            height: 120px;
-            position: relative;
-        }
-        .header_rmb {
-            margin-left: 70%;
-            position: relative;
-            width: 30%;
-        }
-        .header_rmb > div {
-            position: absolute;
-            top : 5%;
-            font-family: "Noto Sans KR";
-            font-size: 18px;
-            color: gray;
-        }
-        .rmb_rank {
-            right: 40%;
-        }
-        .rmb_category {
-            right : 20%;
-        }
-    </style>
 
     <div class="content">
         <div class="cont_box">
             <div class="logo_box">
-                Logo
+                <img src="/Images/logo.png" alter="DICE 로고" title="모든 보드게임 정보 - DICE!">
             </div>
             <div class="search_box">
-                Search
+                <input id="searchbox" type="text" name="search" value="Search..">
             </div>
+            <script>
+                $( document ).ready(function() {
+                    var TmpSearchKey = "";
+
+                    $("#searchbox")
+                        .focus(function() {
+                            TmpSearchKey =  $("#searchbox").val();
+                            $("#searchbox").val("");
+                            console.log(TmpSearchKey);
+                        })
+                        .focusout(function() {
+                            if ($("#searchbox").val() == "") {
+                                $("#searchbox").val(TmpSearchKey);
+                            }
+                        })
+                        .keypress(function(event) {
+                            if (event.charCode ==13) Search($("#searchbox").val());
+                        });
+                });
+
+                function Search(SearchKey) {
+                    var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
+                    str = SearchKey.replace(regExp,"");
+                    if(str == "" || str == "Search.."){
+                        alert("검색어를 입력해주세요.");
+                    }else if(str.length < 2) {
+                        alert("검색어를 두 글자 이상으로 입력해 주세요.");
+
+                    }else{
+
+                        var ESearchKey = encodeURI(SearchKey);
+                        var DataURL ="/Search_JSON/?query="  + ESearchKey;
+
+                        $.getJSON(DataURL, function(JSonData) {
+                            if (JSonData.T_count == 0)
+                                alert("'DICE 에는 '" + SearchKey + "' 에 대한 자료가 없습니다.",location.reload());
+                            else {
+                                path = "/SearchResult/?query=" + ESearchKey;
+                                window.location.href = path;
+                            }
+                        });
+                    }
+                }
+            </script>
             <div class="slider">
                 <div>slide 1</div>
                 <div>slide 2</div>
@@ -84,16 +107,10 @@
 </body>
 
 <style>
-    * {
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        margin: 0;
+    .header_rmb a {
+        color: gray;
+        text-decoration: none;
     }
-    html, body {
-        width : 100%;
-    }
-
     .content {
         width: 100%;
         height: 697px;
@@ -108,20 +125,30 @@
         height: 300px;
         position: absolute;
         top : 0px;
-        border: 1px solid gray;
-        border-radius: 10px;
         line-height: 300px;
         text-align: center;
+    }
+    .logo_box img {
+        height: 100%;
+        width: auto;
     }
     .search_box {
         width: 100%;
         height: 40px;
         position: relative;
         top : 350px;
+    }
+    #searchbox {
+        height: 100%;
+        width: 100%;
         border : 1px solid gray;
         border-radius: 10px;
         text-align: center;
         line-height: 40px;
+    }
+    #searchbox input:focus {
+        border : 2px solid black;
+        outline: none;
     }
     .bx-wrapper {
         width: 90%;
