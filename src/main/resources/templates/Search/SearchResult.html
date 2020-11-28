@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="KR">
+<html lang="KR" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>검색 결과</title>
@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <!--favicon-->
+    <link rel="icon" href="/Images/favicon.ico" type="image/x-icon">
     <!--custom css-->
     <link rel="stylesheet" href="/CSS/Header.css">
     <link rel="stylesheet" href="/CSS/Base.css">
@@ -89,7 +91,7 @@
     <div class="contbox">
         <div class="search_query">
             "
-            <span>다빈치 코드</span>
+            <span th:text="${query}"></span>
             "의 검색 결과 입니다.
         </div>
         <div class="search_result">

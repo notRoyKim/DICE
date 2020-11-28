@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#git pull
+git pull
+
 #gradle build
 ./gradlew build --no-daemon
 
