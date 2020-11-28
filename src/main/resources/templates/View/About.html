@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="KR">
+<head>
+    <meta charset="UTF-8">
+    <title>자세히</title>
+    <!--XEicon으로 헤더 우측 메뉴 버튼과 톱니바퀴 모양-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!--구글 폰트-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="header_sbox">
+        <div class="sbox_logo">로고 자리</div>
+        <div class="sbox_search">
+            <input type="text" name="query" value="Search..."/>
+        </div>
+    </div>
+    <div class="header_rmb">
+        <div class="rmb_rank">랭킹</div>
+        <div class="rmb_category">카테고리</div>
+    </div>
+</header>
+
+<style>
+    header {
+        width: 100%;
+        height: 120px;
+        position: relative;
+    }
+    header > div {
+        height: 100%;
+        float: left;
+    }
+
+    .header_sbox {
+        width: 70%;
+    }
+    .header_sbox > div {
+        float: left;
+    }
+    .sbox_logo {
+        display: inline-block;
+        margin-left: 5%;
+        width: 15%;
+        height: 100%;
+    }
+    .sbox_search {
+        height: 100%;
+        width: 80%;
+        line-height: 120px;
+    }
+    .sbox_search > input {
+        height: 40px;
+        border: 2px solid gray;
+        border-radius: 5px;
+        width: 80%;
+        text-align: center;
+    }
+
+    .header_rmb {
+        position: relative;
+        width: 30%;
+    }
+    .header_rmb > div {
+        position: absolute;
+        top : 5%;
+        font-family: "Noto Sans KR";
+        font-size: 18px;
+        color: gray;
+    }
+    .rmb_rank {
+        right: 40%;
+    }
+    .rmb_category {
+        right : 20%;
+    }
+</style>
+
+<div class="content">
+    <div class="categorybox">
+        <div style="margin-left: 230px">
+            <div>Inference</div>
+            <div>추리</div>
+        </div>
+        <div>
+            <div>Adventure</div>
+            <div>모험</div>
+        </div>
+        <div>
+            <div>Party</div>
+            <div>파티</div>
+        </div>
+        <div>
+            <div>Brain</div>
+            <div>두뇌</div>
+        </div>
+        <div>
+            <div>Betting & Cooperation</div>
+            <div>베팅 & 협력</div>
+        </div>
+        <div>
+            <div>Strategy</div>
+            <div>전략</div>
+        </div>
+    </div>
+    <div class="contbox">
+        <div class="detailbox">
+            <div class="detail_left">
+                <div class="detail_image">
+                    사진
+                </div>
+                <input type="button" value="상세 규칙 보기"/>
+            </div>
+            <div class="detail_right">
+                <div class="right_header">
+                    <div class="right_title">
+                        <div class="title_title">
+                            다빈치 코드
+                        </div>
+                        <div class="title_context">
+                            누가 먼저 비밀 코드를 풀 것인가?
+                        </div>
+                    </div>
+                    <div class="right_rating">
+                        <div class="rating_star">
+                            <i class="xi-star-o xi-2x"></i>
+                            <i class="xi-star-o xi-2x"></i>
+                            <i class="xi-star-o xi-2x"></i>
+                            <i class="xi-star-o xi-2x"></i>
+                            <i class="xi-star-o xi-2x"></i>
+                        </div>
+                        <input type="button" value="평점 등록"/>
+                    </div>
+                </div>
+                <div class="right_context">
+                    <div>
+                        가격 : <span>22000원</span>
+                    </div>
+                    <div>
+                        난이도 : <span>중</span>
+                    </div>
+                    <div>
+                        게임 인원 : <span>2~4인</span>
+                    </div>
+                    <div>
+                        게임 연령 : <span>7세 이상</span>
+                    </div>
+                    <div>
+                        게임 시간 : <span>15분</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content {
+        width: 100%;
+    }
+    .categorybox {
+        height: 38px;
+        width: 100%;
+        box-shadow: gray 0px 3px 3px;
+    }
+    .categorybox > div {
+        text-align: center;
+        float: left;
+        cursor: pointer;
+        margin: 0 50px 0 50px;
+        color: gray;
+        font-family: "Nanum Gothic";
+        font-size: 16px;
+    }
+    .contbox {
+        width: 80%;
+        margin: auto;
+        min-height: 659px;
+    }
+    .detailbox {
+        width: 100%;
+    }
+    .detailbox > div {
+        min-height: 659px;
+        float: left;
+    }
+    .detail_left {
+        height: 659px;
+        width: 40%;
+    }
+    .detail_image {
+        margin: 50px auto 0 auto;
+        height: 450px;
+        width: 450px;
+        border-radius: 10px;
+        background: black;
+    }
+    .detail_left > input {
+        width: 400px;
+        height: 40px;
+        margin: 20px auto 0 auto;
+        display: block;
+        border-radius: 10px;
+        background: #537bc8;
+        color: white;
+        font-size: 18px;
+        border: 0px;
+        line-height: 40px;
+        cursor: pointer;
+    }
+
+    .detail_right {
+        height: 659px;
+        width: 60%;
+    }
+    .right_header {
+        width: 100%;
+        height: 30%;
+        border-bottom: 3px solid gray;
+    }
+    .right_header > div {
+        height: 100%;
+        float: left;
+    }
+    .right_title {
+        width: 70%;
+    }
+    .title_title {
+        margin-top: 80px;
+        font-size: 40px;
+        line-height: 60px;
+    }
+    .title_context {
+        color: gray;
+        line-height: 40px;
+        font-size: 22px;
+    }
+    .right_rating {
+        width: 30%;
+    }
+    .right_rating > * {
+        text-align: center;
+        margin: auto;
+    }
+    .right_rating > input {
+        display: block;
+        margin-top: 10px;
+        width: 150px;
+        height: 30px;
+        line-height: 25px;
+        border: 0px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+        background: #537bc8;
+    }
+    .rating_star {
+        margin-top: 100px;
+    }
+    .right_context {
+        padding-top: 60px;
+    }
+    .right_context > div {
+        color: gray;
+        font-size: 20px;
+        line-height: 40px;
+    }
+</style>
+
+<div class="footer">
+    copyright © DICE, all rights reserved.
+</div>
+
+</body>
+
+<style>
+    * {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+    }
+    html, body {
+        width : 100%;
+    }
+    .footer {
+        height: 120px;
+        width: 100%;
+        background: lightslategray;
+        text-align: center;
+        line-height: 120px;
+        color: white;
+    }
+</style>
+
+</html>
