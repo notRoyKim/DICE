@@ -2,27 +2,65 @@
 /*   Notroykim  */
 /*     김상우    */
 /*              */
-
-header > div {
-    height: 100%;
-    float: left;
-}
 header {
     width: 100%;
     height: 120px;
     position: relative;
 }
+header > div {
+    height: 100%;
+    float: left;
+}
+
+.header_sbox {
+    width: 70%;
+}
+.header_sbox > div {
+    float: left;
+}
+.sbox_logo {
+    display: inline-block;
+    margin: 0 1% 0 4%;
+    width: 15%;
+    height: 100%;
+    padding: 1%;
+}
+.sbox_logo img {
+    margin-top: auto;
+    height: auto;
+    width: 100%;
+}
+.sbox_search {
+    height: 100%;
+    width: 80%;
+    line-height: 120px;
+}
+#searchbox {
+    height: 40px;
+    width: 80%;
+    border : 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+}
+#searchbox:focus {
+    border : 2px solid black;
+    outline: none;
+}
 .header_rmb {
-    margin-left: 70%;
     position: relative;
     width: 30%;
 }
-.header_rmb > div {
+.header_rmb div {
     position: absolute;
     top : 5%;
     font-family: "Noto Sans KR";
     font-size: 18px;
     color: gray;
+}
+.header_rmb a {
+    color: gray;
+    text-decoration: none;
 }
 .rmb_rank {
     right: 40%;

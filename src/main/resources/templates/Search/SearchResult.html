@@ -12,77 +12,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <!--custom css-->
+    <link rel="stylesheet" href="/CSS/Header.css">
     <link rel="stylesheet" href="/CSS/Base.css">
 </head>
 <body>
 
 <header>
     <div class="header_sbox">
-        <div class="sbox_logo">로고 자리</div>
-        <div class="sbox_search">
-            <input type="text" name="query" value="Search..."/>
+        <div class="sbox_logo">
+            <a href="/">
+                <img src="/Images/logo.png" alter="DICE 로고" title="모든 보드게임 정보 - DICE!">
+            </a>
         </div>
+        <div class="sbox_search">
+            <input id="searchbox" type="text" name="search" value="Search.." autocomplete="off">
+        </div>
+        <script>
+            $( document ).ready(function() {
+                var TmpSearchKey = "";
+
+                $("#searchbox")
+                    .focus(function() {
+                        TmpSearchKey =  $("#searchbox").val();
+                        $("#searchbox").val("");
+                        console.log(TmpSearchKey);
+                    })
+                    .focusout(function() {
+                        if ($("#searchbox").val() == "") {
+                            $("#searchbox").val(TmpSearchKey);
+                        }
+                    })
+                    .keypress(function(event) {
+                        if (event.charCode ==13) Search($("#searchbox").val());
+                    });
+            });
+
+            function Search(SearchKey) {
+                var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
+                str = SearchKey.replace(regExp,"");
+                if(str == "" || str == "Search.."){
+                    alert("검색어를 입력해주세요.");
+                }else if(str.length < 2) {
+                    alert("검색어를 두 글자 이상으로 입력해 주세요.");
+
+                }else{
+
+                    var ESearchKey = encodeURI(SearchKey);
+                    var DataURL ="/Search_JSON/?query="  + ESearchKey;
+
+                    $.getJSON(DataURL, function(JSonData) {
+                        if (JSonData.T_count == 0)
+                            alert("'DICE 에는 '" + SearchKey + "' 에 대한 자료가 없습니다.",location.reload());
+                        else {
+                            path = "/SearchResult/?query=" + ESearchKey;
+                            window.location.href = path;
+                        }
+                    });
+                }
+            }
+        </script>
     </div>
     <div class="header_rmb">
-        <div class="rmb_rank">랭킹</div>
-        <div class="rmb_category">카테고리</div>
+        <div class="rmb_rank">
+            <a href="/Ranking">랭킹</a>
+        </div>
+        <div class="rmb_category">
+            <a href="/Category">카테고리</a>
+        </div>
     </div>
 </header>
 
-<style>
-    header {
-        width: 100%;
-        height: 120px;
-        position: relative;
-    }
-    header > div {
-        height: 100%;
-        float: left;
-    }
-
-    .header_sbox {
-        width: 70%;
-    }
-    .header_sbox > div {
-        float: left;
-    }
-    .sbox_logo {
-        display: inline-block;
-        margin-left: 5%;
-        width: 15%;
-        height: 100%;
-    }
-    .sbox_search {
-        height: 100%;
-        width: 80%;
-        line-height: 120px;
-    }
-    .sbox_search > input {
-        height: 40px;
-        border: 2px solid gray;
-        border-radius: 5px;
-        width: 80%;
-        text-align: center;
-    }
-
-    .header_rmb {
-        position: relative;
-        width: 30%;
-    }
-    .header_rmb > div {
-        position: absolute;
-        top : 5%;
-        font-family: "Noto Sans KR";
-        font-size: 18px;
-        color: gray;
-    }
-    .rmb_rank {
-        right: 40%;
-    }
-    .rmb_category {
-        right : 20%;
-    }
-</style>
 
 <div class="content">
     <div class="shadowbox">

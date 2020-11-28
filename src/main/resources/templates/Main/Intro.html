@@ -19,7 +19,7 @@
     <!--favicon-->
     <link rel="icon" href="/Images/favicon.ico" type="image/x-icon">
     <!--custom css-->
-    <link rel="stylesheet" href="/CSS/Header.css">
+    <link rel="stylesheet" href="/CSS/Header_Mainpage.css">
     <link rel="stylesheet" href="/CSS/Base.css">
 </head>
 
@@ -41,7 +41,7 @@
                 <img src="/Images/logo.png" alter="DICE 로고" title="모든 보드게임 정보 - DICE!">
             </div>
             <div class="search_box">
-                <input id="searchbox" type="text" name="search" value="Search..">
+                <input id="searchbox" type="text" name="search" value="Search.." autocomplete="off">
             </div>
             <script>
                 $( document ).ready(function() {
@@ -107,10 +107,6 @@
 </body>
 
 <style>
-    .header_rmb a {
-        color: gray;
-        text-decoration: none;
-    }
     .content {
         width: 100%;
         height: 697px;
@@ -146,7 +142,7 @@
         text-align: center;
         line-height: 40px;
     }
-    #searchbox input:focus {
+    #searchbox:focus {
         border : 2px solid black;
         outline: none;
     }
@@ -156,6 +152,12 @@
         position: relative;
         top: 420px;
         margin: auto;
+    }
+    .bx-prev {
+        left: -50px !important;
+    }
+    .bx-next {
+        right: -50px !important;
     }
 
     .footer {
