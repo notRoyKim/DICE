@@ -2,6 +2,8 @@
 
 #git pull
 git pull
+mv build.sh deploy.sh
+echo "yes"
 
 #gradle build
 chmod 777 gradlew
