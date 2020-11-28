@@ -4,6 +4,7 @@
 git pull
 
 #gradle build
+chmod 777 gradlew
 ./gradlew build --no-daemon
 
 #jar start
