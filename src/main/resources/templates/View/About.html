@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="KR">
+<html lang="KR" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>자세히</title>
@@ -115,19 +115,15 @@
         <div class="detailbox">
             <div class="detail_left">
                 <div class="detail_image">
-                    사진
+                    <img th:src="${aboutView.files}" th:title="${aboutView.title}"/>
                 </div>
                 <input type="button" value="상세 규칙 보기"/>
             </div>
             <div class="detail_right">
                 <div class="right_header">
                     <div class="right_title">
-                        <div class="title_title">
-                            다빈치 코드
-                        </div>
-                        <div class="title_context">
-                            누가 먼저 비밀 코드를 풀 것인가?
-                        </div>
+                        <div class="title_title" th:text="${aboutView.title}"></div>
+                        <div class="title_context" th:text="${aboutView.context}"></div>
                     </div>
                     <div class="right_rating">
                         <div class="rating_star">
@@ -142,19 +138,19 @@
                 </div>
                 <div class="right_context">
                     <div>
-                        가격 : <span>22000원</span>
+                        가격 : <span th:text="${aboutView.price}"></span>
                     </div>
                     <div>
-                        난이도 : <span>중</span>
+                        난이도 : <span th:text="${aboutView.difficulty}"></span>
                     </div>
                     <div>
-                        게임 인원 : <span>2~4인</span>
+                        게임 인원 : <span th:text="${aboutView.headcount}"></span>
                     </div>
                     <div>
-                        게임 연령 : <span>7세 이상</span>
+                        게임 연령 : <span th:text="${aboutView.age}"></span>
                     </div>
                     <div>
-                        게임 시간 : <span>15분</span>
+                        게임 시간 : <span th:text="${aboutView.playtime}"></span>
                     </div>
                 </div>
             </div>
@@ -202,6 +198,10 @@
         width: 450px;
         border-radius: 10px;
         background: black;
+        overflow: hidden;
+    }
+    .detail_image img{
+        height: 100%;
     }
     .detail_left > input {
         width: 400px;

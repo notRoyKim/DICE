@@ -17,11 +17,11 @@ public class SearchController {
 
         String query = request.getParameter("query");
 
-        if(query == null) {
+        if(query == null || query == "") {
             mv.setViewName("ErrorControl/404");
             return mv;
         }
-        else if(query.length() < 3) {
+        else if(query.length() < 2) {
             mv.setViewName("ErrorControl/404");
             return mv;
         }

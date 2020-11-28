@@ -229,7 +229,7 @@
 
     function MakeDIV(Val) {
         //링크 주소가 view를 가리키고, No를 get으로 받는 링크를 가진 grid를 만듬
-        var StrTmp = '<div class="non_blocksIt"><div class="search_imgbox">';
+        var StrTmp = '<div class="non_blocksIt"><a href="/About/?ID=' + Val.id + '"><div class="search_imgbox">';
         //만일 DB에서 가져온 값에 사진이 있다면
         if(Val.files != "") {
             StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
@@ -240,7 +240,7 @@
         StrTmp += '<div class="search_context"><div class="search_title">' + Val.title + '</div>' +
             '<div class="search_options">' + Val.headcount + ',' + Val.age + ',' + Val.playtime + '</div>' +
             '<input type="button" value="상세규칙 바로가기"/><div><i class="xi-star-o"></i><i class="xi-star-o">' +
-            '</i><i class="xi-star-o"></i><i class="xi-star-o"></i><i class="xi-star-o"></i></div></div></div>';
+            '</i><i class="xi-star-o"></i><i class="xi-star-o"></i><i class="xi-star-o"></i></div></div></a></div>';
 
         return StrTmp;
     }
@@ -279,6 +279,10 @@
         width: 20%;
         height: 350px;
         position: relative;
+    }
+    .non_blocksIt a {
+        text-decoration: none;
+        color: black;
     }
     .search_imgbox {
         position: absolute;
