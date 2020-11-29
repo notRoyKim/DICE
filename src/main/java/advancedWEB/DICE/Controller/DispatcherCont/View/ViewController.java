@@ -1,8 +1,7 @@
 package advancedWEB.DICE.Controller.DispatcherCont.View;
 
-import advancedWEB.DICE.Domain.Search.SearchResult;
 import advancedWEB.DICE.Domain.View.AboutView;
-import advancedWEB.DICE.Service.Search.SearchService;
+import advancedWEB.DICE.Service.Data.DataService;
 import advancedWEB.DICE.Service.View.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,10 @@ public class ViewController {
 
     @Autowired
     ViewService viewService;
+
+    @Autowired
+    DataService dataService;
+
 
     @RequestMapping(value="/About", method = RequestMethod.GET)
     public ModelAndView about(HttpServletRequest request) throws Exception {
@@ -36,6 +39,8 @@ public class ViewController {
 
         aboutView = viewService.AboutViewByID(ID);
 
+        String category = dataService.IDCategory(ID);
+
         if(aboutView == null) {
             mv.setViewName("ErrorControl/404");
             return mv;
@@ -43,6 +48,7 @@ public class ViewController {
 
         mv.setViewName("View/About");
         mv.addObject("aboutView",aboutView);
+        mv.addObject("category",category);
         return mv;
     }
 }

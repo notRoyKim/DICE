@@ -42,29 +42,39 @@
     </div>
 </header>
 
+<script>
+    /*<![CDATA[*/
+    var category = "#" + "[[${category}]]";
+    /*]]>*/
+    window.onload = function (){
+        $(category).css('font-weight','bold');
+        $(category).css('color','black');
+    };
+</script>
+
 <div class="content">
     <div class="categorybox">
-        <div style="margin-left: 230px">
+        <div id = "Inference" style="margin-left: 230px">
             <div>Inference</div>
             <div>추리</div>
         </div>
-        <div>
+        <div id = "Adventure">
             <div>Adventure</div>
             <div>모험</div>
         </div>
-        <div>
+        <div id = "Party">
             <div>Party</div>
             <div>파티</div>
         </div>
-        <div>
+        <div id = "Brain">
             <div>Brain</div>
             <div>두뇌</div>
         </div>
-        <div>
+        <div id = "Betting">
             <div>Betting & Cooperation</div>
             <div>베팅 & 협력</div>
         </div>
-        <div>
+        <div id = "Strategy">
             <div>Strategy</div>
             <div>전략</div>
         </div>

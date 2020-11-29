@@ -32,7 +32,7 @@ public class SearchService {
 
         return SearchResultList;
     }
-    //검색 전체 기능
+    //검색 기능
     public List<SearchResult> SearchBoardAllWithLimit(String SearchWord, int Page, int NumPage) {
 
         List<String> result_ID = searchMapper.SearchBoardIDWithLimit(SearchWord, Page * NumPage, NumPage);

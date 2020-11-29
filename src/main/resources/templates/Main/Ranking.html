@@ -13,6 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <!--favicon-->
     <link rel="icon" href="/Images/favicon.ico" type="image/x-icon">
+    <!--blocksit-->
+    <script src="/JS/blocksit.js"></script>
+    <!--ImagesLoaded min-->
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <!--custom css-->
     <link rel="stylesheet" href="/CSS/Header.css">
     <link rel="stylesheet" href="/CSS/Base.css">
@@ -45,43 +49,114 @@
 <div class="content">
     <div class="contbox">
         <div class="cbox_ranking">
-            <div class="rankingbox">
-                <div class="rank_num">
-                    1
-                </div>
-                <div class="rank_img">
-                    사진
-                </div>
-                <div class="rank_context">
-                    <div class="rank_title">
-                        뱅
-                    </div>
-                    <div class="rank_options">
-                        <div class="option_people">
-                            인원 : <span>4~7명</span>
-                        </div>
-                        <div class="option_playtime">
-                            플레이 시간 : <span>15분</span>
-                        </div>
-                        <div class="option_ages">
-                            연령 : <span>8세 이상</span>
-                        </div>
-                        <div class="option_genre">
-                            장르 : <span>플레잉 카드</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="rank_rating">
-                    <i class="xi-star-o xi-3x"></i>
-                    <i class="xi-star-o xi-3x"></i>
-                    <i class="xi-star-o xi-3x"></i>
-                    <i class="xi-star-o xi-3x"></i>
-                    <i class="xi-star-o xi-3x"></i>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+<script>
+    var ListArray = Array();
+    var Page = 0;
+    var NuminPage = 20;
+
+    var Flag = true;
+    var EndFlag = true;
+    var ranknum = 1;
+
+    $(window).ready(function() {
+        //Content > Searchbox의 너비를 받아옴
+        var width = $(".cbox_ranking").width();
+
+        $('.cbox_ranking').imagesLoaded( function(){
+            $('.cbox_ranking').BlocksIt({
+                numOfCol:1,
+                offsetX:5,
+                offsetY:5
+            });
+        });
+
+        $(window).resize(function() {
+            $('.cbox_ranking').BlocksIt ({
+                numOfCol: 1,
+                offsetX: 5,
+                offsetY: 5
+            });
+        });
+
+        $(window).scroll(function()
+        {
+            if (document.body.scrollHeight - $(this).scrollTop()  <= $(this).height())
+            {
+                DataLoad();
+            }
+        });
+        DataLoad();
+    });
+
+    function DataLoad() {
+        if(Flag && EndFlag) {
+
+            //동기를 위해 Lock을 할 때 Flag
+            Flag = false;
+
+            var DataURL = "/Ranking_JSON/?Page=" + Page + "&NumPage=" + NuminPage ;
+            $.getJSON(DataURL, function(JSonData) {
+
+                if(JSonData["Count"] == 0) {
+                    EndFlag = false;
+                    return;
+                }
+
+                //Div태그 작성
+                $.each(JSonData.RankingResult, function(Key, Val) {
+                    var Temp = MakeDIV(Val);
+                    ListArray.push(Temp);
+                    $(".cbox_ranking").append($(Temp));
+                });
+            })
+                .done(function() {
+                    $('.cbox_ranking').imagesLoaded( function(){
+                        $('.cbox_ranking').BlocksIt({
+                            numOfCol: 1,
+                            offsetX: 5,
+                            offsetY: 5
+                        });
+                        Page++;
+                        Flag = true;
+                    });
+                });
+        }
+    }
+
+    function MakeDIV(Val) {
+        //링크 주소가 view를 가리키고, No를 get으로 받는 링크를 가진 grid를 만듬
+        var StrTmp = '<div class="non_blocksIt"><a href="/About/?ID=' + Val.id + '"><div class="search_imgbox">';
+        //만일 DB에서 가져온 값에 사진이 있다면
+        if(Val.files != "") {
+            StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
+        }
+        else {
+            StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></div>';
+        }
+        StrTmp += '<div class="search_context"><div class="search_title">' + Val.title + '</div>' +
+            '<div class="search_options">' + Val.headcount + ',' + Val.age + ',' + Val.playtime + '</div>' +
+            '<input type="button" value="상세규칙 바로가기"/><div><i class="xi-star-o"></i><i class="xi-star-o">' +
+            '</i><i class="xi-star-o"></i><i class="xi-star-o"></i><i class="xi-star-o"></i></div></div></a></div>';
+
+        var StrTmp = '<div class="rankingbox"><div class="rank_num">' + ranknum + '</div><div class="rank_img">';
+        if(Val.files != "") {
+            StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
+        }
+        else {
+            StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></div>';
+        }
+        StrTmp += '</div><div class="rank_context"><div class="rank_title">' + Val.title + '</div><div class="rank_options">' +
+            '<div class="option_people">인원 : <span>' + Val.headcount + '</span></div><div class="option_playtime">플레이 시간 : <span>' + Val.playtime +
+            '</span></div><div class="option_ages">연령 : <span>8세 이상</span></div><div class="option_category">카테고리 : <span>플레잉 카드</span> +
+            '</div></div></div><div class="rank_rating"><i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i>' +
+            '<i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i></div></div>'
+        return StrTmp;
+    }
+</script>
 
 <style>
     .content {
