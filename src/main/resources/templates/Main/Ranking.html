@@ -128,20 +128,6 @@
     }
 
     function MakeDIV(Val) {
-        //링크 주소가 view를 가리키고, No를 get으로 받는 링크를 가진 grid를 만듬
-        var StrTmp = '<div class="non_blocksIt"><a href="/About/?ID=' + Val.id + '"><div class="search_imgbox">';
-        //만일 DB에서 가져온 값에 사진이 있다면
-        if(Val.files != "") {
-            StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
-        }
-        else {
-            StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></div>';
-        }
-        StrTmp += '<div class="search_context"><div class="search_title">' + Val.title + '</div>' +
-            '<div class="search_options">' + Val.headcount + ',' + Val.age + ',' + Val.playtime + '</div>' +
-            '<input type="button" value="상세규칙 바로가기"/><div><i class="xi-star-o"></i><i class="xi-star-o">' +
-            '</i><i class="xi-star-o"></i><i class="xi-star-o"></i><i class="xi-star-o"></i></div></div></a></div>';
-
         var StrTmp = '<div class="rankingbox"><div class="rank_num">' + ranknum + '</div><div class="rank_img">';
         if(Val.files != "") {
             StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
@@ -149,11 +135,12 @@
         else {
             StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></div>';
         }
-        StrTmp += '</div><div class="rank_context"><div class="rank_title">' + Val.title + '</div><div class="rank_options">' +
+        StrTmp += '<div class="rank_context"><div class="rank_title">' + Val.title + '</div><div class="rank_options">' +
             '<div class="option_people">인원 : <span>' + Val.headcount + '</span></div><div class="option_playtime">플레이 시간 : <span>' + Val.playtime +
-            '</span></div><div class="option_ages">연령 : <span>8세 이상</span></div><div class="option_category">카테고리 : <span>플레잉 카드</span> +
+            '</span></div><div class="option_ages">연령 : <span>' + Val.age + '</span></div><div class="option_category">카테고리 : <span>' + Val.category + '</span>' +
             '</div></div></div><div class="rank_rating"><i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i>' +
             '<i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i></div></div>'
+        ranknum++;
         return StrTmp;
     }
 </script>
@@ -172,7 +159,7 @@
         height: 100%;
         width: 100%;
         font-family: "Nanum Gothic";
-
+        position: relative;
         margin-bottom: 40px;
     }
     .rankingbox {
@@ -180,6 +167,7 @@
         width: 100%;
         background: white;
         border-bottom: 3px solid gray;
+        position: relative;
     }
     .rankingbox > div {
         float: left;
@@ -192,6 +180,12 @@
         width: 225px;
         height: 100%;
         margin-left: 3%;
+        overflow: hidden;
+    }
+    .rank_img img {
+        height: 100%;
+        width: auto;
+        margin: auto;
     }
     .rank_context {
         width: 50%;
@@ -219,10 +213,10 @@
     .option_people, .option_playtime {
         top : 20px;
     }
-    .option_ages, .option_genre {
+    .option_ages, .option_category {
         top : 60px;
     }
-    .option_playtime, .option_genre {
+    .option_playtime, .option_category {
         left:  200px;
     }
     .rank_rating {
