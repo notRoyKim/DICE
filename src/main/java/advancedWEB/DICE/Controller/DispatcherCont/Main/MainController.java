@@ -24,11 +24,14 @@ public class MainController {
 
         return mv;
     }
-    @RequestMapping(value="/Category", method = RequestMethod.GET)
+    @RequestMapping(value="/Category", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView category(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("Main/Category");
 
+        String Category = request.getParameter("Category");
+
+        mv.setViewName("Main/Category");
+        mv.addObject("Category",Category);
         return mv;
     }
     @RequestMapping(value="/HowToSearch", method = RequestMethod.GET)
