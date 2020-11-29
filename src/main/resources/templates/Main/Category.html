@@ -189,9 +189,17 @@
         }
         StrTmp += '<div class="search_context"><div class="search_title">' + Val.title + '</div>' +
             '<div class="search_options">' + Val.headcount + ',' + Val.age + ',' + Val.playtime + '</div>' +
-            '<input type="button" value="상세규칙 바로가기"/><div><i class="xi-star-o"></i><i class="xi-star-o">' +
-            '</i><i class="xi-star-o"></i><i class="xi-star-o"></i><i class="xi-star-o"></i></div></div></a></div>';
+            '<input type="button" value="상세규칙 바로가기"/><div>';
 
+        for(i = 1; i <= 5; i++) {
+            if(i > Val.rate) {
+                StrTmp += '<i class="xi-star-o"></i>';
+            }
+            else {
+                StrTmp += '<i class="xi-star"></i>';
+            }
+        }
+        StrTmp += '</div></div></a></div>';
         return StrTmp;
     }
 </script>

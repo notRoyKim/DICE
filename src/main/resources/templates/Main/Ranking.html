@@ -41,7 +41,7 @@
             <a href="/Ranking">랭킹</a>
         </div>
         <div class="rmb_category">
-            <a href="/Category">카테고리</a>
+            <a href="/HowToSearch">검색하는 방법</a>
         </div>
     </div>
 </header>
@@ -128,18 +128,27 @@
     }
 
     function MakeDIV(Val) {
-        var StrTmp = '<div class="rankingbox"><div class="rank_num">' + ranknum + '</div><div class="rank_img">';
+        var StrTmp = '<div class="rankingbox"><div class="rank_num">' + ranknum + '</div><div class="rank_img"><a href="/About/?ID=' + Val.id + '">';
         if(Val.files != "") {
-            StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></div>';
+            StrTmp += '<img src="' + Val.files + '" title="' + Val.title + '"></a></div>';
         }
         else {
-            StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></div>';
+            StrTmp += '<img src="http://http://15.164.232.90/Images/NoPhoto.gif" title="' + Val.title + '"></a></div>';
         }
-        StrTmp += '<div class="rank_context"><div class="rank_title">' + Val.title + '</div><div class="rank_options">' +
+        StrTmp += '<div class="rank_context"><a href="/About/?ID=' + Val.id + '"><div class="rank_title">' + Val.title + '</div></a><div class="rank_options">' +
             '<div class="option_people">인원 : <span>' + Val.headcount + '</span></div><div class="option_playtime">플레이 시간 : <span>' + Val.playtime +
             '</span></div><div class="option_ages">연령 : <span>' + Val.age + '</span></div><div class="option_category">카테고리 : <span>' + Val.category + '</span>' +
-            '</div></div></div><div class="rank_rating"><i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i>' +
-            '<i class="xi-star-o xi-3x"></i><i class="xi-star-o xi-3x"></i></div></div>'
+            '</div></div></div><div class="rank_rating">';
+
+        for(i = 1; i <= 5; i++) {
+            if(i > Val.rate) {
+                StrTmp += '<i class="xi-star-o xi-3x"></i>';
+            }
+            else {
+                StrTmp += '<i class="xi-star xi-3x"></i>';
+            }
+        }
+        StrTmp += '</div></div>';
         ranknum++;
         return StrTmp;
     }
@@ -188,6 +197,12 @@
         margin: auto;
     }
     .rank_context {
+        width: 50%;
+        height: 100%;
+    }
+    .rank_context > a{
+        text-decoration: none;
+        color: black;
         width: 50%;
         height: 100%;
     }
