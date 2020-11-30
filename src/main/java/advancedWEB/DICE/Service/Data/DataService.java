@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataService {
@@ -29,6 +30,14 @@ public class DataService {
         }
 
         return result_List;
+    }
+
+    public void setData(Map<String, String> sqlParam) {
+        dataMapper.setData(sqlParam);
+    }
+
+    public void setImage(Map<String, String> sqlParam) {
+        dataMapper.setImage(sqlParam);
     }
 
 }

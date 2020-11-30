@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -41,4 +43,12 @@ public class MainController {
 
         return mv;
     }
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public ModelAndView admin(HttpServletRequest request, HttpServletResponse response)  throws Exception{
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Admin/Admin");
+
+        return mv;
+    }
+
 }
