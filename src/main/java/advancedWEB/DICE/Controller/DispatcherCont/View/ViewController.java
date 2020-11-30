@@ -1,5 +1,6 @@
 package advancedWEB.DICE.Controller.DispatcherCont.View;
 
+import advancedWEB.DICE.Domain.Data.Rating;
 import advancedWEB.DICE.Domain.View.AboutView;
 import advancedWEB.DICE.Service.Data.DataService;
 import advancedWEB.DICE.Service.View.ViewService;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ViewController {
@@ -41,6 +44,8 @@ public class ViewController {
 
         String category = dataService.IDCategory(ID);
 
+        Rating rate = dataService.getRateID(ID);
+
         if(aboutView == null) {
             mv.setViewName("ErrorControl/404");
             return mv;
@@ -49,6 +54,8 @@ public class ViewController {
         mv.setViewName("View/About");
         mv.addObject("aboutView",aboutView);
         mv.addObject("category",category);
+        mv.addObject("Rate",rate.getRate());
+        mv.addObject("Ratecount",rate.getRatecount());
         return mv;
     }
 }

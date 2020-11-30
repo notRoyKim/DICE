@@ -2,6 +2,7 @@ package advancedWEB.DICE.Service.Data;
 
 import advancedWEB.DICE.Domain.Data.Category;
 import org.apache.ibatis.annotations.Insert;
+import advancedWEB.DICE.Domain.Data.Rating;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,4 +23,6 @@ public interface DataMapper {
 
     @Insert("INSERT INTO ImageFiles (Board_ID, Files) VALUE ((SELECT ID from BoardInfo WHERE Title='${title}') ,'${image}');")
     void setImage(Map<String, String> sqlParam);
+    @Select("SELECT Rate, RateCount FROM Rating WHERE Board_ID = ${ID};")
+    Rating getRateID(String ID);
 }
