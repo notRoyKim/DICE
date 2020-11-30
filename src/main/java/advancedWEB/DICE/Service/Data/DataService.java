@@ -1,10 +1,12 @@
 package advancedWEB.DICE.Service.Data;
 
 import advancedWEB.DICE.Domain.Data.Category;
+import advancedWEB.DICE.Domain.Data.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataService {
@@ -29,6 +31,9 @@ public class DataService {
         }
 
         return result_List;
+    }
+    public Rating getRateID(String ID) {
+        return dataMapper.getRateID(ID);
     }
 
 }
