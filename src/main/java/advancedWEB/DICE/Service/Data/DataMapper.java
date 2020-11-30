@@ -24,6 +24,16 @@ public interface DataMapper {
 
     @Insert("INSERT INTO ImageFiles (Board_ID, Files) VALUE ((SELECT ID from BoardInfo WHERE Title='${title}') ,'${image}');")
     void setImage(Map<String, String> sqlParam);
+
+    @Insert("INSERT INTO Category (Board_ID, Category) VALUE ((SELECT ID from BoardInfo WHERE Title='${title}') ,'${category}');")
+    void setCategory(Map<String, String> sqlParam);
+
+    @Insert("INSERT INTO Rating (Board_ID, Rate, Ratecount) VALUE ((SELECT ID from BoardInfo WHERE Title='${title}'), 0, 0);")
+    void setRating(Map<String, String> sqlParam);
+
+    @Insert("Insert INTO Rules (Board_ID, Files) VALUE ((SELECT ID from BoardInfo WHERE Title='${title}'), '${rules}');")
+    void setRules(Map<String, String> sqlParam);
+
     @Select("SELECT Rate, RateCount FROM Rating WHERE Board_ID = ${ID};")
     Rating getRateID(String ID);
 
