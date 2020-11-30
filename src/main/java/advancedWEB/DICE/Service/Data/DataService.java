@@ -44,4 +44,14 @@ public class DataService {
         dataMapper.setImage(sqlParam);
     }
 
+    public void setRate(String ID, float Tmprate) {
+        Rating rating = dataMapper.getRateID(ID);
+
+        int ratecount = Integer.parseInt(rating.getRatecount()) + 1;
+        float rate = (rating.getRate() * Integer.parseInt(rating.getRatecount()) + Tmprate) / ratecount;
+
+        dataMapper.setRateID(ID, rate);
+        dataMapper.setRateCountID(ID, ratecount);
+    }
+
 }

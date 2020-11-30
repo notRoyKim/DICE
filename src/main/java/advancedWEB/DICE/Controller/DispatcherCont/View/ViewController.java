@@ -54,8 +54,9 @@ public class ViewController {
         mv.setViewName("View/About");
         mv.addObject("aboutView",aboutView);
         mv.addObject("category",category);
-        mv.addObject("Rate",rate.getRate());
+        mv.addObject("Rate",String.format("%.1f", rate.getRate()));
         mv.addObject("Ratecount",rate.getRatecount());
+        mv.addObject("ID",ID);
         return mv;
     }
 }

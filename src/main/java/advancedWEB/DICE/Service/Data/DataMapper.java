@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import advancedWEB.DICE.Domain.Data.Rating;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,9 @@ public interface DataMapper {
     void setImage(Map<String, String> sqlParam);
     @Select("SELECT Rate, RateCount FROM Rating WHERE Board_ID = ${ID};")
     Rating getRateID(String ID);
+
+    @Update("UPDATE Rating SET Rate = '${rate}' WHERE Board_ID = ${ID};")
+    void setRateID(String ID, float rate);
+    @Update("UPDATE Rating SET RateCount = '${ratecount}' WHERE Board_ID = ${ID};")
+    void setRateCountID(String ID, int ratecount);
 }
