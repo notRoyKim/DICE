@@ -36,12 +36,16 @@ public class DataService {
         return dataMapper.getRateID(ID);
     }
 
-    public void setData(Map<String, String> sqlParam) {
+    public void setData(Map<String, String> sqlParam, Map<String, String> imageSqlParam, Map<String, String> categorySqlParam) {
+
         dataMapper.setData(sqlParam);
+        dataMapper.setImage(imageSqlParam);
+        dataMapper.setCategory(categorySqlParam);
+        dataMapper.setRating(sqlParam);
+        dataMapper.setRules(imageSqlParam);
     }
 
-    public void setImage(Map<String, String> sqlParam) {
-        dataMapper.setImage(sqlParam);
-    }
+
+
 
 }

@@ -28,34 +28,52 @@ public class UploadController {
         try {
             String title = request.getParameter("title");
             String context = request.getParameter("context");
-            String genre = request.getParameter("genre");
+            String category = request.getParameter("genre");
             String age = request.getParameter("age");
             String headcount = request.getParameter("headcount");
             String difficulty = request.getParameter("difficulty");
             String time = request.getParameter("time");
             String price = request.getParameter("price");
             MultipartFile image = request.getFile("img");
+            MultipartFile[] images = new MultipartFile[4];
+            images[0] = request.getFile("img1");
+            images[1] = request.getFile("img2");
+            images[2] = request.getFile("img3");
+            images[3] = request.getFile("img4");
 
             Map<String, String> sqlParam = new HashMap<>();
 
             File file = new File(path + image.getOriginalFilename());
             image.transferTo(file);
+            String rules = "";
+            for (MultipartFile f : images) {
+                if (!f.getOriginalFilename().equals("")) {
+                    File detailFile = new File(path + f.getOriginalFilename());
+                    f.transferTo(detailFile);
+                    rules += f.getOriginalFilename() + ",";
+                }
+            }
 
             Map<String, String> imageSqlParam = new HashMap<>();
             imageSqlParam.put("image", image.getOriginalFilename());
             imageSqlParam.put("title", title);
+            imageSqlParam.put("rules", rules);
+
+            Map<String, String> categorySqlParam = new HashMap<>();
+            categorySqlParam.put("category", category);
+            categorySqlParam.put("title", title);
 
             sqlParam.put("title", title);
             sqlParam.put("context", context);
-            sqlParam.put("genre", genre);
-            sqlParam.put("age", age);
+            sqlParam.put("category", category);
             sqlParam.put("headcount", headcount);
+            sqlParam.put("age", age);
             sqlParam.put("difficulty", difficulty);
             sqlParam.put("time", time);
             sqlParam.put("price", price);
 
-            dataService.setData(sqlParam);
-            dataService.setImage(imageSqlParam);
+
+            dataService.setData(sqlParam, imageSqlParam, categorySqlParam);
 
         } catch (Exception e) {
             e.printStackTrace();
