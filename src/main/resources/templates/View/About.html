@@ -184,14 +184,18 @@
             })
         })
         $('#rulebtn').click(function () {
-            var StrTmp = "<div id='background'><div id='bb1'></div><div class='slider'><div><img src='http://15.164.232.90/Images/%EB%8B%A4%EB%B9%88%EC%B9%98%EC%BD%94%EB%93%9C1.PNG'/></div><div><img src='http://15.164.232.90/Images/%EB%8B%A4%EB%B9%88%EC%B9%98%EC%BD%94%EB%93%9C2.PNG'/></div>";
+            var StrTmp = "<div id='background'><div id='bb1'></div><div class='xbtn' onclick='xbtnclick()'>X</div><div class='slider'>" +
+                "<div><img src='http://15.164.232.90/Images/%EB%8B%A4%EB%B9%88%EC%B9%98%EC%BD%94%EB%93%9C1.PNG'/></div>" +
+                "<div><img src='http://15.164.232.90/Images/%EB%8B%A4%EB%B9%88%EC%B9%98%EC%BD%94%EB%93%9C2.PNG'/></div>";
 
             StrTmp += "</div><div>";
             $('body').append(StrTmp);
 
             $('.slider').bxSlider();
         })
-
+    }
+    function xbtnclick() {
+        $('#background').remove();
     }
 </script>
 
@@ -218,6 +222,22 @@
         top:10%;
         background: white;
         opacity: 1;
+    }
+    .slider img{
+        margin:auto;
+    }
+    .xbtn {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        position : absolute;
+        top: 5%;
+        right: 5%;
+        text-align: center;
+        line-height: 40px;
+        background: white;
+        font-weight: bold;
+        font-size: 22px;
     }
 </style>
 
