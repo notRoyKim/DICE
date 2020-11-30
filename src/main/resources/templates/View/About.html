@@ -51,6 +51,8 @@
     var category = "#" + "[[${category}]]";
     var Rate = "[[${Rate}]]";
     var ID = "[[${ID}]]";
+    var TempFiles = "[[${FilesList}]]";
+    var FilesList = TempFiles.split(",");
     /*]]>*/
     window.onload = function (){
         $(category).css('font-weight','bold');
@@ -166,7 +168,7 @@
         $('.xi-3x').hover(function () {
             Rate = $(this).attr("value");
             for(i = 1; i <= $(this).attr("value"); i++) {
-                $('#R' + i).css("color","lightslategray");
+                $('#R' + i).css("color","#537bc8");
             }
             for(i = 5; i > $(this).attr("value"); i--) {
                 $('#R' + i).css("color","black");
@@ -184,9 +186,11 @@
             })
         })
         $('#rulebtn').click(function () {
-            var StrTmp = "<div id='background'><div id='bb1'></div><div class='xbtn' onclick='xbtnclick()'>X</div><div class='slider'>" +
-                "<div><img src='http://15.164.232.90/Images/%EB%8B%A4%EB%B9%88%EC%B9%98%EC%BD%94%EB%93%9C1.PNG'/></div>" +
-                "<div><img src='http://15.164.232.90/Images/%EB%8B%A4%EB%B9%88%EC%B9%98%EC%BD%94%EB%93%9C2.PNG'/></div>";
+            var StrTmp = "<div id='background'><div id='bb1'></div><div class='xbtn' onclick='xbtnclick()'>X</div><div class='slider'>";
+            for(var i in FilesList) {
+                StrTmp += "<div><img src='http://15.164.232.90/Images/"+ FilesList[i] + "'/></div>"
+            }
+            console.log(FilesList);
 
             StrTmp += "</div><div>";
             $('body').append(StrTmp);

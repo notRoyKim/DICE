@@ -51,11 +51,14 @@ public class ViewController {
             return mv;
         }
 
+        String FilesList = dataService.getFiles(ID);
+
         mv.setViewName("View/About");
         mv.addObject("aboutView",aboutView);
         mv.addObject("category",category);
         mv.addObject("Rate",String.format("%.1f", rate.getRate()));
         mv.addObject("Ratecount",rate.getRatecount());
+        mv.addObject("FilesList",FilesList);
         mv.addObject("ID",ID);
         return mv;
     }

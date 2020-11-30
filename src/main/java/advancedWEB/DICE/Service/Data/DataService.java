@@ -5,6 +5,7 @@ import advancedWEB.DICE.Domain.Data.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +57,10 @@ public class DataService {
 
         dataMapper.setRateID(ID, rate);
         dataMapper.setRateCountID(ID, ratecount);
+    }
+
+    public String getFiles(String ID) {
+        return dataMapper.getFiles(ID);
     }
 
 }

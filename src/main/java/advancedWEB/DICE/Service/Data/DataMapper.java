@@ -41,4 +41,7 @@ public interface DataMapper {
     void setRateID(String ID, float rate);
     @Update("UPDATE Rating SET RateCount = '${ratecount}' WHERE Board_ID = ${ID};")
     void setRateCountID(String ID, int ratecount);
+
+    @Select("SELECT Files FROM Rules WHERE Board_ID = ${ID}")
+    String getFiles(String ID);
 }
