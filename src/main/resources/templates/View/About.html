@@ -45,6 +45,7 @@
 <script>
     /*<![CDATA[*/
     var category = "#" + "[[${category}]]";
+    var Rate = "[[${Rate}]]";
     /*]]>*/
     window.onload = function (){
         $(category).css('font-weight','bold');
@@ -95,11 +96,12 @@
                     </div>
                     <div class="right_rating">
                         <div class="rating_star">
-                            <i class="xi-star-o xi-2x"></i>
-                            <i class="xi-star-o xi-2x"></i>
-                            <i class="xi-star-o xi-2x"></i>
-                            <i class="xi-star-o xi-2x"></i>
-                            <i class="xi-star-o xi-2x"></i>
+
+                        </div>
+                        <div>
+                            <span th:text="${Rate}"></span>
+                            <span> / 5.0  참여 수 : </span>
+                            <span th:text="${Ratecount}"></span>
                         </div>
                         <input type="button" value="평점 등록"/>
                     </div>
@@ -144,6 +146,27 @@
         document.body.appendChild(form);
         form.submit();
     })
+    window.onload = function () {
+        var StrTmp = "";
+        for(i = 1; i <= 5; i++) {
+            if (i > Rate) {
+                StrTmp += '<i class="xi-star-o xi-3x" id ="R' + i + '" value ="' + i + '"></i>';
+            } else {
+                StrTmp += '<i class="xi-star xi-3x" id ="R' + i + '" value ="' + i + '"></i>';
+            }
+        }
+        $('.rating_star').append(StrTmp);
+
+
+        $('.xi-3x').hover(function () {
+            for(i = 1; i <= $(this).attr("value"); i++) {
+                $('#R' + i).css("color","red");
+            }
+            for(i = 5; i > $(this).attr("value"); i--) {
+                $('#R' + i).css("color","black");
+            }
+        })
+    }
 </script>
 
 <style>
@@ -252,7 +275,7 @@
         background: #537bc8;
     }
     .rating_star {
-        margin-top: 100px;
+        margin-top: 80px;
     }
     .right_context {
         padding-top: 60px;

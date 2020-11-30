@@ -1,6 +1,7 @@
 package advancedWEB.DICE.Service.Data;
 
 import advancedWEB.DICE.Domain.Data.Category;
+import advancedWEB.DICE.Domain.Data.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,9 @@ public class DataService {
         }
 
         return result_List;
+    }
+    public Rating getRateID(String ID) {
+        return dataMapper.getRateID(ID);
     }
 
     public void setData(Map<String, String> sqlParam) {
