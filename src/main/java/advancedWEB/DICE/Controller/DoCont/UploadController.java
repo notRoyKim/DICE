@@ -54,6 +54,8 @@ public class UploadController {
                 }
             }
 
+            rules = rules.substring(0, rules.length() - 1);
+
             Map<String, String> imageSqlParam = new HashMap<>();
             imageSqlParam.put("image", image.getOriginalFilename());
             imageSqlParam.put("title", title);
