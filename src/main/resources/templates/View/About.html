@@ -136,23 +136,23 @@
 </div>
 
 <script>
-    $('.categorybox > div').click(function (){
-        var div_id = $(this).attr('id')
-        var form = document.createElement('form');
-
-        form.setAttribute('method', 'post');
-        form.setAttribute('action', '/Category');
-        document.charset = "utf-8";
-
-        var hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('name', 'Category');
-        hiddenField.setAttribute('value', div_id);
-
-        form.appendChild(hiddenField);
-        document.body.appendChild(form);
-        form.submit();
-    })
+    // $('.categorybox > div').click(function (){
+    //     var div_id = $(this).attr('id')
+    //     var form = document.createElement('form');
+    //
+    //     form.setAttribute('method', 'post');
+    //     form.setAttribute('action', '/Category');
+    //     document.charset = "utf-8";
+    //
+    //     var hiddenField = document.createElement('input');
+    //     hiddenField.setAttribute('type', 'hidden');
+    //     hiddenField.setAttribute('name', 'Category');
+    //     hiddenField.setAttribute('value', div_id);
+    //
+    //     form.appendChild(hiddenField);
+    //     document.body.appendChild(form);
+    //     form.submit();
+    // })
     window.onload = function () {
         var StrTmp = "";
         for(i = 1; i <= 5; i++) {
