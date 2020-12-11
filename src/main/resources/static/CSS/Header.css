@@ -52,19 +52,14 @@ header > div {
     width: 30%;
 }
 .header_rmb div {
-    position: absolute;
     top : 5%;
     font-family: "Noto Sans KR";
     font-size: 18px;
     color: gray;
+    float:left;
+    margin: 5px 5px 5px 5px;
 }
 .header_rmb a {
     color: gray;
     text-decoration: none;
-}
-.rmb_rank {
-    right: 40%;
-}
-.rmb_category {
-    right : 20%;
 }
